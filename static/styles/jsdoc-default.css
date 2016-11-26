@@ -15,23 +15,23 @@ body
     background-color: white;
 }
 
-a, a:visited, a:active {
+tt, code, kbd, samp {
+    font-family: monospace;
+    color: #5A5A5A;
+    padding: 0 .25em .1em .25em;
+    margin: 0 .08em;
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+    background-color: #F8F8F8;
+}
+
+a, a:visited, a:active, a>code {
     color: #0095dd;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
-}
-
-header
-{
-    display: block;
-    padding: 0px 4px;
-}
-
-tt, code, kbd, samp {
-    font-family: Consolas, Monaco, 'Roboto', monospace;
 }
 
 .class-description {
@@ -50,8 +50,11 @@ tt, code, kbd, samp {
     width: 75%;
 }
 
-article dl {
-    margin-bottom: 40px;
+article dl:not(.details),
+div.description+h5, div.description+h5+ul,
+p+h5, p+h5+ul,
+h4.name+h5, h4.name+h5+ul {
+    display: none; /* This hides the "Type" section which seems to be redundant */
 }
 
 section
@@ -93,9 +96,10 @@ nav ul {
 }
 
 nav ul a, nav ul a:visited, nav ul a:active {
-    font-family: Consolas, Monaco, 'Roboto', monospace;
+    font-family: monospace;
+    font-weight: bold;
     line-height: 18px;
-    color: #4D4E53;
+    color: #0095dd;
 }
 
 nav h3 {
@@ -114,6 +118,15 @@ footer {
     font-size: 90%;
 }
 
+p.summary+p {
+    font-weight: bold
+}
+
+p.summary+p:before {
+    color: #BBB;
+    content: "\25BA\A0\A0" /* right-pointing arrow + 2 non-breaking spaces */
+}
+
 h1, h2, h3, h4 {
     font-weight: 200;
     margin: 0;
@@ -127,20 +140,33 @@ h1
     margin: 12px 24px 20px;
 }
 
-h2, h3
-{
+h2, h3 {
     font-size: 30px;
     font-weight: 700;
-    letter-spacing: -1px;
     margin-bottom: 12px;
 }
 
-h4
-{
+header h2, article h3 {
+    margin-top: 1.5em;
+    letter-spacing: .15em;
+    border-bottom: 2px solid black
+}
+
+h4 {
     font-size: 18px;
-    letter-spacing: -0.33px;
     margin-bottom: 12px;
+    margin-top: 1.5em;
     color: #4d4e53;
+}
+
+article > h4 {
+    padding-top: 1.3em;
+    border-top: .1em dashed #DDD
+}
+
+h3+h4 {
+    border-top: 0;
+    padding-top: 0
 }
 
 h5, .container-overview .subsection-title
@@ -234,40 +260,40 @@ h6
 
 .prettyprint code span.line
 {
-  display: inline-block;
+    display: inline-block;
 }
 
 .prettyprint.linenums
 {
-  padding-left: 70px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    padding-left: 70px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .prettyprint.linenums ol
 {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .prettyprint.linenums li
 {
-  border-left: 3px #ddd solid;
+    border-left: 3px #ddd solid;
 }
 
 .prettyprint.linenums li.selected,
 .prettyprint.linenums li.selected *
 {
-  background-color: lightyellow;
+    background-color: lightyellow;
 }
 
 .prettyprint.linenums li *
 {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 .params, .props
@@ -278,8 +304,8 @@ h6
 }
 
 .params .name, .props .name, .name code {
-    color: #4D4E53;
-    font-family: Consolas, Monaco, 'Roboto', monospace;
+    color: #5A5A5A;
+    font-family: monospace;
     font-size: 100%;
 }
 
@@ -326,8 +352,8 @@ h6
     color: #454545;
 }
 
-@media only screen and (max-width : 1200px) { 
-   nav
+@media only screen and (max-width : 1200px) {
+    nav
     {
         width:70%;
         padding-bottom: 5%;
@@ -338,4 +364,28 @@ h6
         padding-left: 16px;
         border-top:black solid 1px;
     }
+}
+
+table {
+    background-color: ivory;
+    border-collapse: collapse;
+}
+th {
+    vertical-align: bottom;
+    background-color: #bbb;
+    color: ivory;
+    border-left: 1px solid white;
+    border-bottom: 3px double #bbb;
+    padding: 4px 6px 3px;
+}
+td {
+    vertical-align: top;
+    border: 1px solid #bbb;
+    padding: 4px 6px 3px;
+}
+th:first-of-type {
+    border-left: 1px solid #bbb
+}
+th:last-of-type {
+    border-right: 1px solid #bbb
 }
